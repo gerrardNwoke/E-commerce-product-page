@@ -1,0 +1,817 @@
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-size: 16px;
+  font-family: "Kumbh Sans", sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  margin-top: 3em;
+  max-width: 40em;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1em 1em;
+  top: 0;
+  position: fixed;
+  background-color: white;
+  width: 100%;
+  max-width: 40em;
+  z-index: 99;
+}
+header .menu-bar {
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+header .logo-area {
+  margin-right: 2em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  -moz-column-gap: 1em;
+       column-gap: 1em;
+}
+header .links {
+  display: none;
+}
+header .cart-and-profile {
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  -moz-column-gap: 1em;
+       column-gap: 1em;
+}
+header .cart-and-profile .profile {
+  min-width: 1.5em;
+  max-width: 2.5em;
+  min-height: 1.5em;
+  max-height: 2.5em;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  transition: border-color 0.2s ease-out;
+  cursor: pointer;
+}
+header .cart-and-profile .profile:hover {
+  border-color: #ff7d1a;
+}
+header .cart-and-profile .profile img {
+  width: 100%;
+}
+header .cart-and-profile .cart {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
+}
+header .cart-and-profile .cart svg path {
+  transition: fill 0.2s ease-in-out;
+}
+header .cart-and-profile .cart svg:hover path {
+  fill: black;
+}
+header .cart-and-profile .cart #cart-indicator {
+  position: absolute;
+  font-size: 0.8em;
+  top: 2%;
+  right: -30%;
+  padding: 0.06em 0.6em;
+  background-color: #ff7d1a;
+  color: white;
+  text-align: center;
+  border-radius: 0.75em;
+  font-weight: 700;
+  border: 2px solid white;
+  transition: transform 0.2s ease-in-out;
+}
+header .cart-status {
+  background-color: white;
+  position: fixed;
+  width: 95%;
+  max-width: 30em;
+  min-height: 14em;
+  top: 5em;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.404);
+  transform: translateY(-25%);
+  opacity: 0;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+header .cart-status h2 {
+  padding: 1.5em 1.5em;
+  border-bottom: 2px solid #b6bcc8;
+}
+header .cart-status #cart-empty {
+  color: #68707d;
+  font-weight: 700;
+  line-height: 11em;
+  opacity: 1;
+  align-self: center;
+}
+header .cart-status .item-in-cart {
+  justify-content: stretch;
+  width: 100%;
+  margin: 0;
+  padding: 1.5em 1.5em 0.5em 1.5em;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  row-gap: 1em;
+  top: 0;
+  border-radius: 0 0 1rem 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  display: none;
+}
+header .cart-status .item-in-cart .item-info {
+  align-self: center;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  height: 100%;
+  width: 85%;
+  row-gap: 0.2em;
+  color: #68707d;
+  font-weight: 400;
+}
+header .cart-status .item-in-cart .item-info .item-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  align-self: end;
+}
+header .cart-status .item-in-cart .item-info .price-calc {
+  align-self: start;
+  text-overflow: ellipsis;
+}
+header .cart-status .item-in-cart .item-info .price-calc #total-amount {
+  margin-left: 0.1em;
+  color: black;
+  font-weight: 700;
+}
+header .cart-status .item-in-cart .item-img {
+  width: 80%;
+  align-self: center;
+}
+header .cart-status .item-in-cart .item-img img {
+  width: 100%;
+  border-radius: 0.4em;
+}
+header .cart-status .item-in-cart #delete-btn {
+  justify-self: end;
+  align-self: center;
+  cursor: pointer;
+}
+header .cart-status .item-in-cart #delete-btn use {
+  transition: fill 0.2s ease-in-out;
+}
+header .cart-status .item-in-cart #delete-btn:hover use {
+  fill: #ff3333;
+}
+header .cart-status .checkout-btn {
+  grid-column: span 3;
+  padding: 1rem;
+  border: none;
+  outline: none;
+  border-radius: 0.4rem;
+  background-color: #ff7d1a;
+  color: white;
+  font-weight: 700;
+  box-shadow: 0px 1em 1em rgba(255, 125, 26, 0.322);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  margin: 1.5em;
+  display: block;
+  box-shadow: unset;
+  align-self: start;
+  width: calc(100% - 3em);
+}
+header .cart-status .checkout-btn:hover {
+  background-color: #ffa061;
+}
+
+.sneaker {
+  width: 100%;
+}
+.sneaker .thumbnail {
+  display: none;
+}
+.sneaker .large-pic {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 85vw;
+  max-height: 35em;
+  overflow: hidden;
+}
+.sneaker .large-pic .carousel {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  transform: translateX(0%);
+}
+.sneaker .large-pic .carousel .sneaker1,
+.sneaker .large-pic .carousel .sneaker2,
+.sneaker .large-pic .carousel .sneaker3,
+.sneaker .large-pic .carousel .sneaker4 {
+  min-width: auto;
+  max-width: 100%;
+  grid-column: 1/2;
+  grid-row: 1/1;
+}
+.sneaker .large-pic .carousel .sneaker2,
+.sneaker .large-pic .carousel .sneaker3,
+.sneaker .large-pic .carousel .sneaker4 {
+  opacity: 0;
+}
+.sneaker .large-pic .arrows {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+.sneaker .large-pic .arrows .prev-btn,
+.sneaker .large-pic .arrows .next-btn {
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: white;
+}
+.sneaker .large-pic .arrows .prev-btn i,
+.sneaker .large-pic .arrows .next-btn i {
+  display: grid;
+  place-items: center;
+  transition: color 0.2s ease-in-out;
+}
+.sneaker .large-pic .arrows .prev-btn:hover i,
+.sneaker .large-pic .arrows .next-btn:hover i {
+  color: #ff7d1a;
+}
+
+.info-area {
+  background-color: white;
+  padding: 1.5rem;
+}
+.info-area .summary h4 {
+  color: #ff7d1a;
+  font-size: 0.8em;
+  margin-bottom: 1.5em;
+  font-weight: 700;
+}
+.info-area .summary h1 {
+  margin-bottom: 0.5em;
+  font-size: 2em;
+}
+.info-area .summary p {
+  color: #68707d;
+  font-weight: 400;
+  margin-bottom: 1em;
+  font-size: 0.9em;
+}
+.info-area .pricing {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5em;
+}
+.info-area .pricing h2 {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: black;
+  display: flex;
+  align-items: center;
+}
+.info-area .pricing h2 span {
+  margin-left: 1em;
+  padding: 0.1em 0.4em;
+  border-radius: 0.2em;
+  background-color: #ffd7bd;
+  font-size: 0.7em;
+  color: #ff7d1a;
+}
+.info-area .pricing h4 {
+  color: #b6bcc8;
+  text-decoration: line-through;
+}
+.info-area .quantity-and-cart {
+  display: flex;
+  flex-direction: column;
+}
+.info-area .quantity-and-cart .quantity {
+  background-color: #f7f8fd;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1em;
+  border-radius: 0.4em;
+  margin-bottom: 1em;
+}
+.info-area .quantity-and-cart .quantity .plus-minus {
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+.info-area .quantity-and-cart .quantity .plus-minus path {
+  fill: #ff7d1a;
+  transition: fill 0.2s ease-in-out;
+}
+.info-area .quantity-and-cart .quantity .plus-minus:hover path {
+  fill: #ffa061;
+}
+.info-area .quantity-and-cart .quantity #counter-num {
+  font-weight: 700;
+}
+.info-area .quantity-and-cart #add-to-cart {
+  padding: 1rem;
+  border: none;
+  outline: none;
+  border-radius: 0.4rem;
+  background-color: #ff7d1a;
+  color: white;
+  font-weight: 700;
+  box-shadow: 0px 1em 1em rgba(255, 125, 26, 0.322);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1em;
+}
+.info-area .quantity-and-cart #add-to-cart:hover {
+  background-color: #ffa061;
+}
+.info-area .quantity-and-cart #add-to-cart svg path {
+  fill: white;
+}
+.info-area .quantity-and-cart #add-to-cart span {
+  font-weight: 700;
+}
+
+.lightbox {
+  display: none;
+}
+
+.sidebar {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.616);
+  z-index: 100;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease-in-out;
+}
+.sidebar .content {
+  padding: 1.5em;
+  height: 100%;
+  width: 60%;
+  max-width: 20em;
+  background-color: white;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+.sidebar .content .close-sidebar {
+  margin-bottom: 3em;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+.sidebar .content .close-sidebar path {
+  transition: fill 0.15s ease-in-out;
+}
+.sidebar .content .close-sidebar:hover path {
+  fill: #ff7d1a;
+}
+.sidebar .content a {
+  text-decoration: none;
+  font-weight: 700;
+  color: black;
+  position: relative;
+  margin-bottom: 1.25em;
+  padding-bottom: 0.5em;
+}
+.sidebar .content a::after {
+  content: "";
+  width: 100%;
+  height: 0.2em;
+  position: absolute;
+  background-color: #ff7d1a;
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+  transform-origin: left;
+}
+.sidebar .content a:hover::after {
+  transform: scaleX(1);
+}
+
+@media screen and (min-width: 62.5rem) {
+  main {
+    margin-top: 0;
+    max-width: 80em;
+    padding: 2em;
+    display: flex;
+    flex-direction: row;
+    -moz-column-gap: 7.5em;
+         column-gap: 7.5em;
+  }
+
+  header {
+    padding: 0 2em;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    position: fixed;
+    max-width: 80em;
+    z-index: 99;
+    border-bottom: 3px solid #f7f8fd;
+    box-sizing: border-box;
+    justify-content: flex-end;
+  }
+  header .menu-bar {
+    display: none;
+  }
+  header .logo-area {
+    padding: 2em 0;
+  }
+  header .links {
+    display: unset;
+    margin-left: 2em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    -moz-column-gap: 2em;
+         column-gap: 2em;
+    margin-right: auto;
+  }
+  header .links a {
+    padding: 2em 0;
+    text-decoration: none;
+    color: #68707d;
+    font-weight: 700;
+    position: relative;
+    text-align: center;
+  }
+  header .links a::after {
+    content: "";
+    width: 100%;
+    height: 0.2em;
+    position: absolute;
+    background-color: #ff7d1a;
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+  header .links a:hover::after {
+    transform: scaleX(1);
+  }
+  header .cart-and-profile {
+    -moz-column-gap: 3em;
+         column-gap: 3em;
+  }
+  header .cart-and-profile .profile {
+    min-height: 1.5em;
+    max-height: 2.5em;
+  }
+  header .cart-status {
+    background-color: white;
+    position: fixed;
+    width: 95%;
+    max-width: 30em;
+    min-height: 14em;
+    top: 6em;
+    left: unset;
+    right: unset;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-self: end;
+  }
+
+  .sneaker {
+    max-width: 27em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+  }
+  .sneaker .thumbnail {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    -moz-column-gap: 1.5em;
+         column-gap: 1.5em;
+    cursor: pointer;
+  }
+  .sneaker .thumbnail img {
+    border-radius: 0.5em;
+    width: 100%;
+    transition: opacity 0.3s ease-in-out;
+  }
+  .sneaker .thumbnail img:hover {
+    opacity: 0.5;
+  }
+  .sneaker .large-pic {
+    width: 100%;
+    height: unset;
+    max-height: 30em;
+  }
+  .sneaker .large-pic .carousel {
+    cursor: pointer;
+  }
+  .sneaker .large-pic .carousel .sneaker1,
+.sneaker .large-pic .carousel .sneaker2,
+.sneaker .large-pic .carousel .sneaker3,
+.sneaker .large-pic .carousel .sneaker4 {
+    min-width: auto;
+    max-width: 100%;
+    border-radius: 1em;
+  }
+  .sneaker .large-pic .arrows {
+    display: none;
+  }
+  .sneaker .large-pic .arrows .prev-next-btn {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    background-color: white;
+  }
+  .sneaker .large-pic .arrows .prev-next-btn:hover path {
+    stroke: #ff7d1a;
+  }
+  .sneaker .large-pic .arrows .prev-next-btn path {
+    transition: stroke 0.15s ease-in-out;
+    stroke: black;
+  }
+
+  .info-area {
+    background-color: white;
+    padding: 1.5em 1em;
+    max-width: 30em;
+  }
+  .info-area .summary h4 {
+    color: #ff7d1a;
+    font-size: 1em;
+    margin-bottom: 1em;
+    font-weight: 700;
+  }
+  .info-area .summary h1 {
+    margin-bottom: 1em;
+    font-size: 2.5em;
+  }
+  .info-area .summary p {
+    color: #68707d;
+    font-weight: 400;
+    margin-bottom: 2em;
+    font-size: 1em;
+  }
+  .info-area .pricing {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 2em;
+  }
+  .info-area .pricing h2 {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: black;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5em;
+  }
+  .info-area .pricing h2 span {
+    margin-left: 1em;
+    padding: 0.1em 0.4em;
+    border-radius: 0.2em;
+    background-color: #ffd7bd;
+    font-size: 0.7em;
+    color: #ff7d1a;
+  }
+  .info-area .pricing h4 {
+    color: #b6bcc8;
+    text-decoration: line-through;
+  }
+  .info-area .quantity-and-cart {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1em;
+  }
+  .info-area .quantity-and-cart .quantity {
+    background-color: #f7f8fd;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1em;
+    border-radius: 0.4em;
+    margin-bottom: 0;
+  }
+  .info-area .quantity-and-cart .quantity #counter {
+    font-weight: 700;
+  }
+  .info-area .quantity-and-cart #add-to-cart {
+    padding: 1rem;
+    border: none;
+    outline: none;
+    border-radius: 0.4rem;
+    background-color: #ff7d1a;
+    color: white;
+    font-weight: 700;
+    box-shadow: 0px 1em 1em rgba(255, 125, 26, 0.322);
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1em;
+  }
+  .info-area .quantity-and-cart #add-to-cart svg path {
+    fill: white;
+  }
+  .info-area .quantity-and-cart #add-to-cart span {
+    font-weight: 700;
+  }
+
+  .lightbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    height: 100%;
+    width: 100vw;
+    left: 50%;
+    top: -50%;
+    transform: translate(-50%, 50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: -99;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  .lightbox .lightbox-content {
+    width: 50vw;
+    max-width: 35em;
+    max-height: 50em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform: translateY(-50%);
+    transition: transform 0.5s ease-in-out;
+  }
+  .lightbox .lightbox-content #close-lightbox {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0 2em;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    transform: translateY(-100%);
+  }
+  .lightbox .lightbox-content #close-lightbox path {
+    fill: white;
+    transition: fill 0.15s ease-in-out;
+  }
+  .lightbox .lightbox-content #close-lightbox:hover path {
+    fill: #ff7d1a;
+  }
+  .lightbox .lightbox-content .large-pic {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .lightbox .lightbox-content .large-pic .carousel {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    transform: translateX(0%);
+  }
+  .lightbox .lightbox-content .large-pic .carousel .sneaker1,
+.lightbox .lightbox-content .large-pic .carousel .sneaker2,
+.lightbox .lightbox-content .large-pic .carousel .sneaker3,
+.lightbox .lightbox-content .large-pic .carousel .sneaker4 {
+    padding: 1.5em;
+    min-width: auto;
+    max-width: 100%;
+    grid-column: 1/2;
+    grid-row: 1/1;
+    border-radius: 3em;
+  }
+  .lightbox .lightbox-content .large-pic .carousel .sneaker2,
+.lightbox .lightbox-content .large-pic .carousel .sneaker3,
+.lightbox .lightbox-content .large-pic .carousel .sneaker4 {
+    opacity: 0;
+  }
+  .lightbox .lightbox-content .large-pic .arrows {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .lightbox .lightbox-content .large-pic .arrows .prev-btn,
+.lightbox .lightbox-content .large-pic .arrows .next-btn {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    background-color: white;
+  }
+  .lightbox .lightbox-content .large-pic .arrows .prev-btn:hover path,
+.lightbox .lightbox-content .large-pic .arrows .next-btn:hover path {
+    stroke: #ff7d1a;
+  }
+  .lightbox .lightbox-content .large-pic .arrows .prev-btn path,
+.lightbox .lightbox-content .large-pic .arrows .next-btn path {
+    transition: stroke 0.15s ease-in-out;
+    stroke: black;
+  }
+  .lightbox .lightbox-content .thumbnail {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    -moz-column-gap: 1.5em;
+         column-gap: 1.5em;
+    cursor: pointer;
+    padding: 0 3em;
+  }
+  .lightbox .lightbox-content .thumbnail img {
+    border-radius: 0.5em;
+    width: 100%;
+    transition: opacity 0.3s ease-in-out;
+    position: relative;
+  }
+  .lightbox .lightbox-content .thumbnail img:hover {
+    opacity: 0.5;
+  }
+
+  .sidebar {
+    display: none;
+  }
+}/*# sourceMappingURL=style.css.map */

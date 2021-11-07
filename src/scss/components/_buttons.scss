@@ -1,0 +1,39 @@
+@use "../abstracts/colors" as clr;
+
+@mixin mainButton {
+    padding: 1rem;
+    border: none;
+    outline: none;
+    border-radius: 0.4rem;
+    background-color: clr.$primary-clr-1;
+    color: white;
+    font-weight: 700;
+    box-shadow: 0px 1em 1em hsla(26, 100%, 55%, 0.322);
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+@mixin arrowsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+@mixin anchorTagHover {
+    content: "";
+    width: 100%;
+    height: 0.2em;
+    position: absolute;
+    background-color: clr.$primary-clr-1;
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
